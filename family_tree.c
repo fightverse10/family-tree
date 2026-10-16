@@ -27,8 +27,8 @@ Person* create_person(const char *name, int age) {
 
 void read_person_info(const char *role, char *name_out, int *age_out) {
     printf("Enter name for %s: ", role);
-    fgets(name_out, 50, stdin);
 
+    fgets(name_out, 50, stdin);
     name_out[strcspn(name_out, "\n")] = '\0';
 
     printf("Enter age for %s: ", role);
@@ -79,12 +79,55 @@ void print_family_relationships(const Person *me) {
            me->mother->mother->age);
 }
 
+void print_tree_visual(const Person *root) {
+
+    printf("\n");
+    printf("=== VISUAL FAMILY TREE ===\n\n");
+
+    printf("%s (Age: %d)\n",
+           root->name,
+           root->age);
+
+    printf("├── Father: %s (Age: %d)\n",
+           root->father->name,
+           root->father->age);
+
+    printf("│   ├── Grandfather: %s (Age: %d)\n",
+           root->father->father->name,
+           root->father->father->age);
+
+    printf("│   └── Grandmother: %s (Age: %d)\n",
+           root->father->mother->name,
+           root->father->mother->age);
+
+    printf("└── Mother: %s (Age: %d)\n",
+           root->mother->name,
+           root->mother->age);
+
+    printf("    ├── Grandfather: %s (Age: %d)\n",
+           root->mother->father->name,
+           root->mother->father->age);
+
+    printf("    └── Grandmother: %s (Age: %d)\n",
+           root->mother->mother->name,
+           root->mother->mother->age);
+}
+
+void free_family_tree(Person *people[], int count) {
+
+    for (int i = 0; i < count; i++) {
+        free(people[i]);
+    }
+}
+
 int main() {
 
     char name[50];
     int age;
 
-    printf("=== FAMILY TREE INPUT ===\n\n");
+    printf("====================================\n");
+    printf("       FAMILY TREE PROGRAM\n");
+    printf("====================================\n\n");
 
     read_person_info("Paternal Grandfather", name, &age);
     Person *paternal_grandfather = create_person(name, age);
@@ -126,6 +169,22 @@ int main() {
     );
 
     print_family_relationships(me);
+
+    print_tree_visual(me);
+
+    Person *people[7] = {
+        paternal_grandfather,
+        paternal_grandmother,
+        maternal_grandfather,
+        maternal_grandmother,
+        father,
+        mother,
+        me
+    };
+
+    free_family_tree(people, 7);
+
+    printf("\nMemory cleanup completed successfully.\n");
 
     return 0;
 }
