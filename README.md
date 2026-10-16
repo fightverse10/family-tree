@@ -1,39 +1,4 @@
-# family-tree
-# Family Tree in C
+# Link for the screenshots,
+## https://docs.google.com/document/d/1TUETO8Ijbcg9EtE7u02AjWXSx0ZGjRKeWhdwwjTDkqA/edit?usp=sharing
 
-## Project Overview
-
-in this project implementing a 3 generation family tree using c structure,
-and dynamic memory allocation, and pointers.
-The program includes following:
-
-
-- Paternal Grandfather
-- Paternal Grandmother
-- Maternal Grandfather
-- Maternal Grandmother
-- Father
-- Mother
-- Yourself
-
-## things used
-
-- Structures
-- Pointers
-- Dynamic memory allocation using 
-- Memory deallocation using 
-- Functions
-- Pointer-based relationships
-- User input
-- Pointer traversal
-
-## Pointer Relationships
-
-The program stores each person as a single Person structure. 
-
-then, Parent child relationships are represented using pointers.
-
-
-
-
-
+I tried my best, but not able to add this file , the screenshot file, so I choose the word document link, Please do accept it, screenshots file, there are lot errors, I must sovle it or atleast debug it.
