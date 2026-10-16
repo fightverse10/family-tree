@@ -37,6 +37,48 @@ void read_person_info(const char *role, char *name_out, int *age_out) {
     getchar();
 }
 
+void link_parents(Person *child, Person *father, Person *mother) {
+    child->father = father;
+    child->mother = mother;
+}
+
+void print_family_relationships(const Person *me) {
+
+    printf("\n");
+    printf("=== FAMILY TREE RELATIONSHIPS ===\n\n");
+
+    printf("1. YOURSELF:\n");
+    printf("   - Name: %s | Age: %d\n\n",
+           me->name, me->age);
+
+    printf("2. PARENTS:\n");
+    printf("   - Father: %s | Age: %d\n",
+           me->father->name,
+           me->father->age);
+
+    printf("   - Mother: %s | Age: %d\n\n",
+           me->mother->name,
+           me->mother->age);
+
+    printf("3. PATERNAL GRANDPARENTS (via Father's Pointers):\n");
+    printf("   - Grandfather: %s | Age: %d\n",
+           me->father->father->name,
+           me->father->father->age);
+
+    printf("   - Grandmother: %s | Age: %d\n\n",
+           me->father->mother->name,
+           me->father->mother->age);
+
+    printf("4. MATERNAL GRANDPARENTS (via Mother's Pointers):\n");
+    printf("   - Grandfather: %s | Age: %d\n",
+           me->mother->father->name,
+           me->mother->father->age);
+
+    printf("   - Grandmother: %s | Age: %d\n",
+           me->mother->mother->name,
+           me->mother->mother->age);
+}
+
 int main() {
 
     char name[50];
@@ -65,7 +107,25 @@ int main() {
     read_person_info("Yourself", name, &age);
     Person *me = create_person(name, age);
 
-    printf("\nAll 7 people have been successfully created.\n");
+    link_parents(
+        father,
+        paternal_grandfather,
+        paternal_grandmother
+    );
+
+    link_parents(
+        mother,
+        maternal_grandfather,
+        maternal_grandmother
+    );
+
+    link_parents(
+        me,
+        father,
+        mother
+    );
+
+    print_family_relationships(me);
 
     return 0;
 }
